@@ -1,9 +1,9 @@
 using Hangfire;
 using Hangfire.Storage.SQLite;
+using HangFirePractise.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
-// Add services to the container.
 
 builder.Services.AddControllers();
 
@@ -14,9 +14,9 @@ builder.Services.AddHangfire(config =>
         .UseSQLiteStorage(configuration.GetConnectionString("DefaultConnection"));
 });
 
-var app = builder.Build();
+builder.Services.AddTransient<IServiceManagement, ServiceManagement>();
 
-// Configure the HTTP request pipeline.
+var app = builder.Build();
 
 app.UseHttpsRedirection();
 
