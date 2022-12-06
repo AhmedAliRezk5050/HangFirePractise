@@ -62,6 +62,8 @@ namespace HangFirePractise.Web.Controllers
             }
 
             driver.Status = 0;
+            
+            RecurringJob.AddOrUpdate<IServiceManagement>(x => x.UpdateDatabase(), Cron.Minutely);
 
             return NoContent();
         }
