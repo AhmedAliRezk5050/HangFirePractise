@@ -363,5 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 .idea
-
-HangFirePractise/fireapp.db
+.vs
+/HangFirePractise.Web/fireapp.db

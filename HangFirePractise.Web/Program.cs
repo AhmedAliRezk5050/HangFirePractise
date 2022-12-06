@@ -9,9 +9,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddHangfire(config =>
 {
-    config.UseSimpleAssemblyNameTypeSerializer()
-        .UseRecommendedSerializerSettings()
-        .UseSQLiteStorage(configuration.GetConnectionString("DefaultConnection"));
+  config.UseSimpleAssemblyNameTypeSerializer()
+      .UseRecommendedSerializerSettings()
+      .UseSQLiteStorage(configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.AddHangfireServer();
@@ -21,6 +21,7 @@ builder.Services.AddTransient<IServiceManagement, ServiceManagement>();
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+
 
 
 app.UseAuthorization();
