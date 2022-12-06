@@ -10,9 +10,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddHangfire(config =>
 {
-  config.UseSimpleAssemblyNameTypeSerializer()
-      .UseRecommendedSerializerSettings()
-      .UseSQLiteStorage(configuration.GetConnectionString("DefaultConnection"));
+    config.UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.AddHangfireServer();
@@ -29,18 +27,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseHangfireDashboard("/hangfire", new DashboardOptions()
-{
-    DashboardTitle = "Drivers Dashboard",
-    Authorization = new []
-    {
-        new HangfireCustomBasicAuthenticationFilter()
-        {
-            Pass = "Passw0rd",
-            User = "Admin"
-        }
-    }
-});
+app.UseHangfireDashboard("/hangfire");
 app.MapHangfireDashboard();
 
 RecurringJob.AddOrUpdate<IServiceManagement>(x =>
