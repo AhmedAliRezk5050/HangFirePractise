@@ -1,4 +1,6 @@
+using Hangfire;
 using HangFirePractise.Web.Models;
+using HangFirePractise.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HangFirePractise.Web.Controllers
@@ -23,7 +25,13 @@ namespace HangFirePractise.Web.Controllers
             if (ModelState.IsValid)
             {
                 _drivers.Add(driver);
+                
+                // fire and forget job
+                var jobId = BackgroundJob
+                    .Enqueue<IServiceManagement>(x => x.SendEmail());
 
+                
+                
                 return CreatedAtAction("GetDriver", new {driver.Id}, driver);
             }
 

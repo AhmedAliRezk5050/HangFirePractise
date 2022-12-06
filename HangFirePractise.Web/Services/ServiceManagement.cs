@@ -4,7 +4,7 @@ public class ServiceManagement : IServiceManagement
 {
     public void SendEmail()
     {
-        Console.WriteLine("Generate Merchandise: Long running task " +
+        Console.WriteLine("Send Email: Long running task " +
                           $"{DateTime.Now:yyyy-M-d dddd}");
     }
 
