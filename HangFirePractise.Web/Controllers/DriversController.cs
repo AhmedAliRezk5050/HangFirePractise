@@ -48,6 +48,10 @@ namespace HangFirePractise.Web.Controllers
                 return NotFound();
             }
 
+            BackgroundJob.Schedule<IServiceManagement>(
+                x => x.SendEmail(),
+                TimeSpan.FromMinutes(1));
+            
             return Ok(driver);
         }
 
